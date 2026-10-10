@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BookNest - Online Book Store</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+
+        <div class="logo">
+            📚 BookNest
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#story">Story Books</a>
+            <a href="#study">Study Books</a>
+            <a href="#others">Others</a>
+        </nav>
+
+        <div class="cart">
+            🛒 Cart
+            <span id="cartCount">0</span>
+        </div>
+
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <p class="small-title">
+                WELCOME TO BOOKNEST
+            </p>
+
+            <h1>
+                Discover Your Next
+                <span>Great Book</span>
+            </h1>
+
+            <p>
+                Explore stories, study materials and
+                interesting books all in one place.
+            </p>
+
+            <a href="#books" class="hero-button">
+                Explore Books →
+            </a>
+
+        </div>
+
+        <div class="hero-books">
+            <div class="hero-book book-one">📕</div>
+            <div class="hero-book book-two">📗</div>
+            <div class="hero-book book-three">📘</div>
+        </div>
+
+    </section>
+
+
+    <!-- Search -->
+    <section class="search-section">
+
+        <h2>Find Your Book</h2>
+
+        <div class="search-box">
+
+            <span>🔍</span>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search books..."
+            >
+
+        </div>
+
+    </section>
+
+
+    <!-- Books -->
+    <main id="books">
+
+
+        <!-- Story Books -->
+        <section class="book-section" id="story">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="section-label">
+                        READ & IMAGINE
+                    </p>
+
+                    <h2>Story Books</h2>
+                </div>
+
+                <button onclick="showCategory('story')">
+                    View All →
+                </button>
+
+            </div>
+
+
+            <div class="book-grid">
+
+                <article
+                    class="book-card"
+                    data-category="story"
+                    data-title="The Secret Garden"
+                >
+
+                    <div class="book-cover purple">
+                        🌸
+                    </div>
+
+                    <div class="book-info">
+
+                        <span class="tag story-tag">
+                            Story
+                        </span>
+
+                        <h3>The Secret Garden</h3>
+
+                        <p>
+                            Frances Hodgson Burnett
+                        </p>
+
+                        <div class="price-row">
+
+                            <strong>₹299</strong>
+
+                            <button onclick="addToCart()">
+                                Add +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <article
+                    class="book-card"
+                    data-category="story"
+                    data-title="Adventure Island"
+                >
+
+                    <div class="book-cover blue">
+                        🏝️
+                    </div>
+
+                    <div class="book-info">
+
+                        <span class="tag story-tag">
+                            Story
+                        </span>
+
+                        <h3>Adventure Island</h3>
+
+                        <p>
+                            R. K. Williams
+                        </p>
+
+                        <div class="price-row">
+
+                            <strong>₹349</strong>
+
+                            <button onclick="addToCart()">
+                                Add +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <article
+                    class="book-card"
+                    data-category="story"
+                    data-title="Mystery House"
+                >
+
+                    <div class="book-cover orange">
+                        🔎
+                    </div>
+
+                    <div class="book-info">
+
+                        <span class="tag story-tag">
+                            Story
+                        </span>
+
+                        <h3>Mystery House</h3>
+
+                        <p>
+                            James Carter
+                        </p>
+
+                        <div class="price-row">
+
+                            <strong>₹399</strong>
+
+                            <button onclick="addToCart()">
+                                Add +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- Study Books -->
+        <section class="book-section" id="study">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="section-label">
+                        LEARN & GROW
+                    </p>
+
+                    <h2>Study Books</h2>
+                </div>
+
+                <button onclick="showCategory('study')">
+                    View All →
+                </button>
+
+            </div>
+
+
+            <div class="book-grid">
+
+                <article
+                    class="book-card"
+                    data-category="study"
+                    data-title="Mathematics Basics"
+                >
+
+                    <div class="book-cover green">
+                        ➗
+                    </div>
+
+                    <div class="book-info">
+
+                        <span class="tag study-tag">
+                            Study
+                        </span>
+
+                        <h3>Mathematics Basics</h3>
+
+                        <p>
+                            Dr. Amit Sharma
+                        </p>
+
+                        <div class="price-row">
+
+                            <strong>₹450</strong>
+
+                            <button onclick="addToCart()">
+                                Add +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <article
+                    class="book-card"
+                    data-category="study"
+                    data-title="Science Explorer"
+                >
+
+                    <div class="book-cover red">
+                        🔬
+                    </div>
+
+                    <div class="book-info">
+
+                        <span class="tag study-tag">
+                            Study
+                        </span>
+
+                        <h3>Science Explorer</h3>
+
+                        <p>
+                            Priya Mehta
+                        </p>
+
+                        <div class="price-row">
+
+                            <strong>₹399</strong>
+
+                            <button onclick="addToCart()">
+                                Add +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <article
+                    class="book-card"
+                    data-category="study"
+                    data-title="English Grammar"
+                >
+
+                    <div class="book-cover yellow">
+                        ✏️
+                    </div>
+
+                    <div class="book-info">
+
+                        <span class="tag study-tag">
+                            Study
+                        </span>
+
+                        <h3>English Grammar</h3>
+
+                        <p>
+                            Sarah Johnson
+                        </p>
+
+                        <div class="price-row">
+
+                            <strong>₹299</strong>
+
+                            <button onclick="addToCart()">
+                                Add +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- Other Books -->
+        <section class="book-section" id="others">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="section-label">
+                        EXPLORE MORE
+                    </p>
+
+                    <h2>Other Books</h2>
+                </div>
+
+            </div>
+
+
+            <div class="book-grid">
+
+                <article
+                    class="book-card"
+                    data-category="other"
+                    data-title="Cooking at Home"
+                >
+
+                    <div class="book-cover pink">
+                        🍳
+                    </div>
+
+                    <div class="book-info">
+
+                        <span class="tag other-tag">
+                            Other
+                        </span>
+
+                        <h3>Cooking at Home</h3>
+
+                        <p>
+                            Emma Wilson
+                        </p>
+
+                        <div class="price-row">
+
+                            <strong>₹499</strong>
+
+                            <button onclick="addToCart()">
+                                Add +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <article
+                    class="book-card"
+                    data-category="other"
+                    data-title="Travel the World"
+                >
+
+                    <div class="book-cover cyan">
+                        ✈️
+                    </div>
+
+                    <div class="book-info">
+
+                        <span class="tag other-tag">
+                            Other
+                        </span>
+
+                        <h3>Travel the World</h3>
+
+                        <p>
+                            David Brown
+                        </p>
+
+                        <div class="price-row">
+
+                            <strong>₹599</strong>
+
+                            <button onclick="addToCart()">
+                                Add +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <article
+                    class="book-card"
+                    data-category="other"
+                    data-title="Learn Photography"
+                >
+
+                    <div class="book-cover dark">
+                        📷
+                    </div>
+
+                    <div class="book-info">
+
+                        <span class="tag other-tag">
+                            Other
+                        </span>
+
+                        <h3>Learn Photography</h3>
+
+                        <p>
+                            Michael Lee
+                        </p>
+
+                        <div class="price-row">
+
+                            <strong>₹549</strong>
+
+                            <button onclick="addToCart()">
+                                Add +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+
+        <div>
+
+            <p class="section-label">
+                BOOK LOVERS
+            </p>
+
+            <h2>
+                Get new books in your inbox
+            </h2>
+
+            <p>
+                Subscribe for new arrivals and special offers.
+            </p>
+
+        </div>
+
+
+        <div class="subscribe">
+
+            <input
+                type="email"
+                id="emailInput"
+                placeholder="Your email address"
+            >
+
+            <button onclick="subscribeUser()">
+                Subscribe
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="footer-logo">
+            📚 BookNest
+        </div>
+
+        <p>
+            Your little corner of the internet for great books.
+        </p>
+
+        <p class="copyright">
+            © 2026 BookNest. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

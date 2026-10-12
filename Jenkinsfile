@@ -1,7 +1,16 @@
 pipeline {
-    agent { label 'spring' }
+    agent {
+        label 'spring'
+    }
+
+    environment {
+        DOCKER_IMAGE = 'samikshabhoir43/book-store'
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'
+        NAMESPACE = 'book-store'
+    }
 
     stages {
+
         stage('Checkout') {
             steps {
                 git branch: 'main',
@@ -9,25 +18,44 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Docker Build') {
             steps {
                 sh '''
-                    docker build -t book-store:latest .
+                    docker build -t ${DOCKER_IMAGE}:${BUILD_NUMBER} .
                 '''
             }
         }
 
-        stage('Deploy Application') {
+        stage('Docker Push') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USERNAME',
+                    passwordVariable: 'DOCKER_PASSWORD'
+                )]) {
+                    sh '''
+                        echo "$DOCKER_PASSWORD" | docker login \
+                            -u "$DOCKER_USERNAME" --password-stdin
+
+                        docker push ${DOCKER_IMAGE}:${BUILD_NUMBER}
+
+                        docker logout
+                    '''
+                }
+            }
+        }
+
+        stage('Kubernetes Deploy') {
             steps {
                 sh '''
-                    docker rm -f book-store-app || true
+                    kubectl apply -f k8s/book-store.yaml
 
-                    docker run -d \
-                        --name book-store-app \
-                        --network book-store-network \
-                        -p 8000:80 \
-                        --restart unless-stopped \
-                        book-store:latest
+                    kubectl set image deployment/book-store \
+                        book-store=${DOCKER_IMAGE}:${BUILD_NUMBER} \
+                        -n ${NAMESPACE}
+
+                    kubectl rollout status deployment/book-store \
+                        -n ${NAMESPACE} --timeout=120s
                 '''
             }
         }
@@ -35,9 +63,11 @@ pipeline {
         stage('Health Check') {
             steps {
                 sh '''
-                    sleep 3
-                    docker ps
-                    curl -f http://localhost:8081/
+                    kubectl get pods -n ${NAMESPACE}
+                    kubectl get svc -n ${NAMESPACE}
+
+                    curl -f --retry 5 --retry-delay 3 \
+                        http://10.21.51.49:30080/
                 '''
             }
         }

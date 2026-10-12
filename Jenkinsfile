@@ -67,7 +67,7 @@ pipeline {
                     kubectl get svc -n ${NAMESPACE}
 
                     curl -f --retry 5 --retry-delay 3 \
-                        http://10.21.51.49:30080/
+                        http://10.21.51.49:30081/
                 '''
             }
         }

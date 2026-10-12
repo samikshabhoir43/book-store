@@ -66,7 +66,7 @@ pipeline {
                     kubectl get pods -n ${NAMESPACE}
                     kubectl get svc -n ${NAMESPACE}
 
-                    curl -f --retry 5 --retry-delay 3 \
+                    curl --noproxy '*' -f --retry 5 --retry-delay 3 \
                         http://10.21.51.49:30081/
                 '''
             }
